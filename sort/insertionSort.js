@@ -13,19 +13,16 @@ const isSorted = (a) => {
     return true;
 }
 
-const selectionSort = (a) => {
+const insertionSort = (a) => {
     const N = a.length;
-    if(isSorted(a)) return a;
 
-    for(let i = 0; i < N; i++) {
-        //exhange a[i] with the smallest entry from a[i+1,...]
-        let min = i;
-        for(let j = i+1; j < N; j++) {
-            if (less(a[j], a[min])) min = j;
+    for(let i = 1; i < N; i++) {
+        for(let j = i; j > 0 && less(a[j], a[j-1]); j--) {
+            exch(a, j, j-1);
         }
-        exch(a, i, min);
+        
     }
     return a;
 }
 
-console.log(selectionSort('malaba'.split('')));
+console.log(insertionSort('malaba'.split('')));
