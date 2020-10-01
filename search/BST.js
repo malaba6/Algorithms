@@ -11,8 +11,8 @@ class BST {
     }
     search(node, data) {
         if(node === null) return null;
-        else if(data > node.data) return this.get(node.right, data);
-        else if(data < node.data) return this.get(node.left, data);
+        else if(data > node.data) return this.search(node.right, data);
+        else if(data < node.data) return this.search(node.left, data);
         else return node;
     }
     insert(data) {

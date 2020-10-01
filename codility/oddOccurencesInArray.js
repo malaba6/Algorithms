@@ -4,6 +4,8 @@ function solution(A) {
         data[e] = (data[e] || 0) + 1;
         return data;
     }, {});
-    return parseInt(Object.entries(obj).filter(e => e.includes(1))[0][0]);
+    for(let e of Object.keys(obj)) {
+        if(obj[e] % 2 !== 0) return parseInt(e);
+    }
 }
 console.log(solution([9,3,9,3,9,7,9]));
