@@ -5,7 +5,7 @@ const tribonacci = (signature,n) => {
         console.log(signature[i]);
         signature.push(signature[i] + signature[i-1] + signature[i-2]);
     }
-    return signature;
+    return signature
 }
 
 console.log(tribonacci([1,0,0], 5));

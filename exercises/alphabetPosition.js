@@ -5,4 +5,34 @@ const alphabetPosition = text => {
     .map((e, i) => alphabets.indexOf(e.toLowerCase()) + 1 ).join(' ');
 }
 
-  console.log(alphabetPosition('#,k%fe*d'));
+// function promise() {
+//   return Promise.reject()
+// }
+
+// promise()
+//   .then(function () {
+//     console.log('Then 1')
+//   })
+
+//   .catch(function () {
+//     console.log('Catch 1')
+//   })
+
+//   .then(function () {
+//     console.log('Then 2')
+//   })
+
+//   .catch(function () {
+//     console.log('Catch 2')
+//   })
+
+//   .then(function () {
+//     console.log('Then 3')
+//   })
+// const a = [8, 2]
+
+// console.log(a.pop(2))
+// console.log(a)
+
+
+

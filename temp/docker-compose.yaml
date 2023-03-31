@@ -1,0 +1,154 @@
+version: '3.4'
+services:
+  amazon:
+    image: registry.digitalocean.com/signalytics-dev/amazon-sp-api-service:b6a05f6
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_PORT=8081
+      - VIRTUAL_HOST=amazon.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Amazon Service API"
+
+  funnels:
+    image: registry.digitalocean.com/signalytics-dev/funnels-service:3fdb94e
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+
+    ports:
+      - "8082:8082"
+    environment:
+      - NODE_PORT=8082
+      - VIRTUAL_HOST=funnels.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Funnels Service API"
+
+  landing-page:
+    image: registry.digitalocean.com/signalytics-dev/landing-page-service:1b141fc
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+    ports:
+      - "8086:8086"
+    environment:
+      - NODE_PORT=8086
+      - VIRTUAL_HOST=landing-page.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Landing Page Service API"
+
+  magic-links:
+    image: registry.digitalocean.com/signalytics-dev/magic-links-service:s3v5m1x5
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+
+    ports:
+      - "8084:8084"
+    environment:
+      - NODE_PORT=8084
+      - VIRTUAL_HOST=magic-links.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Magic Links Service API"
+
+  notification:
+    image: registry.digitalocean.com/signalytics-dev/notification-service:1c061d5
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_PORT=3000
+      - VIRTUAL_HOST=notification.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Notification Service API"
+
+  payout:
+    image: registry.digitalocean.com/signalytics-dev/payout-service:a7d086d
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_PORT=3001
+      - VIRTUAL_HOST=payout.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Payout API"
+
+  rebates-customer:
+    image: registry.digitalocean.com/signalytics-dev/rebates-customer-service:6904036
+    env_file: dev.env
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+
+    ports:
+      - "8085:8085"
+    environment:
+      - NODE_PORT=8085
+      - VIRTUAL_HOST=rebates-customer.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Rebates Customer Service API"
+
+  users:
+    image: registry.digitalocean.com/signalytics-dev/users-service:8c9489b
+    env_file: dev.env
+    ports:
+      - "8083:8083"
+    links:
+      - signalytics-mongo
+    networks:
+      - signalytics
+    environment:
+      - NODE_PORT=8083
+      - VIRTUAL_HOST=users.signalytics.local
+      - VIRTUAL_PORT=8000
+      - PROJECT_NAME="Users Service API"
+  signalytics-mongo:
+    container_name: signalytics-mongo
+    image: mongo:4.4
+    networks:
+      - signalytics
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata_signalytics:/data/db
+
+#   proxy:
+#     image: nginxproxy/nginx-proxy
+#     ports:
+#       - "80:80"
+# #      - "443:443"
+#     volumes:
+# #      - './certs:/etc/nginx/certs'
+#       - /var/run/docker.sock:/tmp/docker.sock:ro
+networks:
+  signalytics:
+    driver: bridge
+
+
+
+volumes:
+  dbdata_signalytics:
+  node_modules:

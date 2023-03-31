@@ -1,7 +1,7 @@
 const count = string => {  
     // The function code should be here
-    return obj = string.split('').reduce((data, e) => {
-        data[e] = (data[e] || 0) + 1;
+    return string.split('').reduce((data, e, i) => {
+        data[i + 1] = e
         return data;
     }, {});
   }
